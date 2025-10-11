@@ -1,0 +1,19 @@
+.App {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  overflow-x: hidden;
+}
+
+.main-body {
+  display: flex;
+  flex-direction: column;
+  width: 100dvw;
+  box-sizing: border-box;
+  min-height: 100dvh;
+  align-items: center;
+  gap: clamp(16px, 3vw, 48px);
+  overflow-x: hidden;
+}

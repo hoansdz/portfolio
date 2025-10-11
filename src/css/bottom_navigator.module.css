@@ -1,0 +1,21 @@
+.mainContent {
+    background-color: rgb(75, 85, 89);
+    width: 100%;
+    box-sizing: border-box;
+    padding: clamp(16px, 4vw, 48px) clamp(16px, 5vw, 64px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(8px, 2vw, 24px);
+}
+
+.contactArea {
+    display: flex;
+    gap: clamp(8px, 2vw, 24px);
+}
+
+.contactIcon {
+    width: clamp(24px, 3vw, 48px);
+    height: auto;
+}

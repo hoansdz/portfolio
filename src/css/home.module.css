@@ -1,0 +1,94 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-image: url('src/assets/bkg.jpg');
+  aspect-ratio: 16/8;
+}
+
+@media (max-width: 520px) {
+  .home {
+    aspect-ratio: 9/11;
+  }
+}
+
+.mainInformation {
+  width: 90%;
+  padding: clamp(16px, 4vw, 48px) clamp(16px, 5vw, 64px);
+  background-color: white;
+  border-radius: 24px;
+  display: flex;
+  gap: clamp(16px, 2vw, 48px);
+  animation: slideDown 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-225px);
+    opacity: 0;
+    transition: opacity 1.5s ease;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.avatar {
+  width: clamp(64px, 16vw, 192px);
+  height: clamp(64px, 16vw, 192px);
+  border-radius: 50%;
+}
+
+.projects {
+  width: 90%;
+  gap: clamp(16px, 4vw, 48px);
+  display: flex;
+  flex-direction: column;
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2vw, 48px);
+  background-color: rgb(241, 249, 255);
+  padding: clamp(16px, 4vw, 48px) clamp(16px, 5vw, 64px);
+  border-radius: 28px;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+.project:hover {
+  transform: translateY(-20px);
+}
+
+.project > p {
+  text-align: center;
+  background-color: rgb(42, 216, 210);
+  padding: clamp(8px, 2vw, 24px) 0;
+  border-radius: 16px;
+  color: white;
+}
+
+.projectSummary {
+  display: flex;
+  gap: clamp(16px, 2vw, 48px);
+  border-radius: 28px;
+}
+
+.projectSummary>img {
+  width: 16%;
+  height: 16%;
+}
