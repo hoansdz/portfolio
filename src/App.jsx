@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom"
+import { Routes, Route, NavLink } from "react-router-dom" //BrowserRouter
 import './App.css'
 import Navigator from './view/navigator'
 import Home from './view/home'
@@ -10,7 +10,7 @@ import BottomNavigator from './view/bottom_navigator'
 
 function App() {
   return (
-    <BrowserRouter>
+    // <BrowserRouter>
       <div className='main-body'>
         <Navigator />
         <div className="App">
@@ -24,7 +24,7 @@ function App() {
         </div>
         <BottomNavigator />
       </div>
-    </BrowserRouter>
+    {/* </BrowserRouter> */}
   );
 }
 
