@@ -119,8 +119,7 @@ function Home() {
     const [currentShowDetail, setCurrentShowDetail] = useState(null)
     return (
         <div className={styles.content}>
-
-            <section id='home' className={styles.home}>
+            <section id='home' className={styles.home} >
                 <p className='largeT' style={{ color: 'white' }}>XIN CHÀO</p>
                 <p className='largestT boldT' style={{ color: 'white' }}>Tôi là Lương Ngọc Hoàn</p>
                 <p className='normalT' style={{ color: '#e5e5e5ff' }}>Tôi là một freelancer</p>
