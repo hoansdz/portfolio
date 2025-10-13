@@ -24,7 +24,7 @@ function App() {
         </div>
         <BottomNavigator />
       </div>
-    {/* </BrowserRouter> */}
+    // {/* </BrowserRouter> */}
   );
 }
 
