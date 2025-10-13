@@ -1,8 +1,86 @@
+import { useState, useContext, createContext, useId } from 'react'
+import { createPortal } from 'react-dom'
 import styles from '../css/home.module.css'
 
-function Project({ title, target, feature, imgUrl }) {
+const DialogContext = createContext()
+
+function Dialog({ children }) {
+    const { setCurrentShowDetail } = useContext(DialogContext)
+    const id = useId()
+    return createPortal(
+        <div id={id} className={styles.dialog} onClick={(e) => {
+            if (e.target.id === id) {
+                setCurrentShowDetail(null)
+            }
+        }}>
+            <div className={styles.dialogContent}>
+                <img onClick={() => setCurrentShowDetail(null)} className={styles.dialogClose} src='src/assets/close.png' alt='Close icon' />
+                {children}
+            </div>
+        </div>,
+        document.body
+    )
+}
+
+function DetailProject(
+    { title, target, feature, imgUrl, langOrFramework, status, role, result, link, images }
+) {
     return (
-        <div className={styles.project}>
+        <Dialog >
+            <div className={styles.project} >
+                <div className={styles.projectSummary}>
+                    <img src={imgUrl} alt={`Title ${title}`}></img>
+                    <div>
+                        <p className='largeT boldT'>{title}</p>
+                        <p className='normalT'>
+                            <b>{'Mục tiêu: '}   </b>
+                            {`${target}`}
+                        </p>
+                        <p className='normalT boldT'>{'Tính năng:'}</p>
+                        <ul style={{ paddingLeft: '32px' }}>
+                            {feature.map((e) => (
+                                <li className='normalT'>
+                                    {e}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                </div>
+                <div style={{
+                    display: 'flex',
+                    gap: '8px',
+                    flexWrap: 'wrap'
+                }}>
+                    {langOrFramework.map(e => (
+                        <p className={`normalT ${styles.langOrFramework}`}>{e}</p>
+                    ))}
+                </div>
+                <p className='normalT'><b>Thời gian thực hiện: </b>{status}</p>
+                <p className='normalT'><b>Vai trò: </b>{role}</p>
+                <p className='normalT'><b>Kết quả: </b>{result}</p>
+                {Object.entries(link).map(([key, value]) => (
+                    <p className='normalT'>
+                        Liên kết: <a className={`normalT ${styles.projectLink}`} href={value} target='_blank' rel='noopener noreferrer' >
+                            {key}
+                        </a>
+                    </p>
+                ))}
+                {images.length && (<div className={styles.projectImages}>
+                    {images.map(e => (
+                        <img className={styles.projectImage} src={e} alt='Images' />
+                    ))}
+                </div>)}
+            </div>
+        </Dialog>
+    )
+}
+
+function Project(params) {
+    const { setCurrentShowDetail } = useContext(DialogContext)
+    const { title, target, feature, imgUrl, langOrFramework } = params
+    return (
+        <div className={`${styles.projectAnimation} ${styles.project}`} onClick={() => setCurrentShowDetail(params)}>
             <div className={styles.projectSummary}>
                 <img src={imgUrl} alt={`Title ${title}`}></img>
                 <div>
@@ -21,7 +99,16 @@ function Project({ title, target, feature, imgUrl }) {
                     </ul>
                 </div>
             </div>
-            <p className='normalT boldT'>
+            <div style={{
+                display: 'flex',
+                gap: '8px',
+                flexWrap: 'wrap'
+            }}>
+                {langOrFramework.map(e => (
+                    <p className={`normalT ${styles.langOrFramework}`}>{e}</p>
+                ))}
+            </div>
+            <p className={`normalT boldT ${styles.projectMore}`}>
                 Xem thêm
             </p>
         </div>
@@ -29,8 +116,10 @@ function Project({ title, target, feature, imgUrl }) {
 }
 
 function Home() {
+    const [currentShowDetail, setCurrentShowDetail] = useState(null)
     return (
         <div className={styles.content}>
+
             <section id='home' className={styles.home}>
                 <p className='largeT' style={{ color: 'white' }}>XIN CHÀO</p>
                 <p className='largestT boldT' style={{ color: 'white' }}>Tôi là Lương Ngọc Hoàn</p>
@@ -57,21 +146,40 @@ function Home() {
                     </p>
                 </div>
             </section>
-            <section id='projects' className={styles.projects}>
-                <p className='largeT boldT'>Dự án freelance</p>
-                <Project imgUrl='src/assets/t-lighting.png'
-                    title='T-Lighting'
-                    target='Lập trình mạch điều khiển đèn led và tạo ứng dụng mobile kết nối qua bluetooth'
-                    feature={[
-                        'Người dùng có thể bật/tắt hoặc thay đổi chế độ sáng, màu sắc, hiệu ứng của đèn LED thông qua ứng dụng trên điện thoại Android và iOS',
-                        'Kết nối mạch với điện thoại qua Bluetooth (BLE).',
-                        'Bật/tắt đèn LED',
-                        'Điều chỉnh độ sáng',
-                        'Thay đổi màu (LED RGB)',
-                        'Chọn hiệu ứng (nhấp nháy, đổi màu tự động)',
-                        'Ứng dụng hoạt động trên cả Android và iOS'
-                    ]} />
-            </section>
+            <DialogContext.Provider value={{ setCurrentShowDetail }}>
+                <section id='projects' className={styles.projects}>
+                    <p className='largeT boldT'>Dự án freelance</p>
+                    <Project imgUrl='src/assets/t-lighting.png'
+                        title='T-Lighting'
+                        target='Lập trình mạch điều khiển đèn led và tạo ứng dụng mobile kết nối qua bluetooth'
+                        feature={[
+                            'Người dùng có thể bật/tắt hoặc thay đổi chế độ sáng, màu sắc, hiệu ứng của đèn LED thông qua ứng dụng trên điện thoại Android và iOS',
+                            'Kết nối mạch với điện thoại qua Bluetooth (BLE).',
+                            'Bật/tắt đèn LED',
+                            'Điều chỉnh độ sáng',
+                            'Thay đổi màu (LED RGB)',
+                            'Chọn hiệu ứng (nhấp nháy, đổi màu tự động)',
+                            'Ứng dụng hoạt động trên cả Android và iOS'
+                        ]}
+                        langOrFramework={[
+                            'C++',
+                            'Dart / Flutter',
+                            'Bluetooth Low Energy'
+                        ]}
+                        status='31/7/2025 - nay'
+                        role='Fullstack Developer'
+                        result='Ứng dụng đã hoàn thiện phiên bản đầu tiên, đang được phát triển tiếp và hiện tại được thử nghiệm với lượng người dùng nhỏ'
+                        link={{
+                            'Google Play': 'https://play.google.com/store/apps/details?id=com.ngocthai.tlighting&hl=vi',
+                            'Appstore': 'https://apps.apple.com/app/t-lighting/id6749724474'
+                        }}
+                        images={Array.from({ length: 7 }, (_, i) => `src/assets/tlighting/${i+1}.jpg`)}
+                    />
+                </section>
+                {currentShowDetail && (
+                    <DetailProject {...currentShowDetail} />
+                )}
+            </DialogContext.Provider>
         </div>
     )
 }

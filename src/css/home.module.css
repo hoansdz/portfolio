@@ -66,15 +66,34 @@
   background-color: rgb(241, 249, 255);
   padding: clamp(16px, 4vw, 48px) clamp(16px, 5vw, 64px);
   border-radius: 28px;
-  cursor: pointer;
-  transition: transform 0.5s ease;
 }
 
-.project:hover {
+.projectLink {
+  text-decoration: none;
+  color: rgb(0, 142, 135);
+}
+
+.projectImages {
+  display: flex;
+  gap: clamp(16px, 3vw, 32px);
+  overflow-x: auto;
+}
+
+.projectImage {
+  height: clamp(256px, 32vw, 512px);
+  width: auto;
+}
+
+.projectAnimation {
+  transition: transform 0.5s ease;
+  cursor: pointer;
+}
+
+.projectAnimation:hover {
   transform: translateY(-20px);
 }
 
-.project > p {
+.projectMore {
   text-align: center;
   background-color: rgb(42, 216, 210);
   padding: clamp(8px, 2vw, 24px) 0;
@@ -91,4 +110,42 @@
 .projectSummary>img {
   width: 16%;
   height: 16%;
+}
+
+.dialog {
+  position: fixed;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgb(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.dialogContent {
+  width: clamp(80%, calc(95% - 15% * min((100vw - 420px) / 300px, 1)), 95%);
+  height: clamp(80%, calc(95% - 15% * min((100vw - 420px) / 300px, 1)), 95%);
+  border-radius: 24px;
+  position: relative;
+  background-color: rgb(241, 249, 255);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.dialogClose {
+  width: clamp(12px, 1.4vw, 32px);
+  height: auto;
+  position: absolute;
+  right: clamp(24px, 1.4vw, 32px);
+  top: clamp(24px, 1.4vw, 32px);
+  cursor: pointer;
+}
+
+.langOrFramework {
+  padding: clamp(8px, 2vw, 16px) clamp(24px, 3vw, 46px);
+  /* background: linear-gradient(to right, #88cdff, #58b9ff, #80d7ff); */
+  background-color: #4eb09b;
+  border-radius: 20px;
+  color: #ffffff;
 }

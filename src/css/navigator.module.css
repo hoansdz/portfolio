@@ -8,6 +8,7 @@
     gap: clamp(12px, 2vw, 32px);
     box-sizing: border-box;
     left: 0;
+    z-index: 1;
 }
 
 .contentHighlight {
