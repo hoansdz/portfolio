@@ -14,7 +14,7 @@ function Dialog({ children }) {
             }
         }}>
             <div className={styles.dialogContent}>
-                <img onClick={() => setCurrentShowDetail(null)} className={styles.dialogClose} src='src/assets/close.png' alt='Close icon' />
+                <img onClick={() => setCurrentShowDetail(null)} className={styles.dialogClose} src='/portfolio/images/close.png' alt='Close icon' />
                 {children}
             </div>
         </div>,
@@ -125,7 +125,7 @@ function Home() {
                 <p className='normalT' style={{ color: '#e5e5e5ff' }}>Tôi là một freelancer</p>
             </section>
             <section id='about' className={styles.mainInformation}>
-                <img src='src/assets/user.png' alt='my avatar' className={styles.avatar} />
+                <img src='/portfolio/images/user.png' alt='my avatar' className={styles.avatar} />
                 <div>
                     <p className="normalT">
                         Xin chào! Tôi là một lập trình viên trẻ, yêu thích công nghệ và xây dựng các sản phẩm số đơn giản, hiệu quả.<br /><br />
@@ -148,7 +148,7 @@ function Home() {
             <DialogContext.Provider value={{ setCurrentShowDetail }}>
                 <section id='projects' className={styles.projects}>
                     <p className='largeT boldT'>Dự án freelance</p>
-                    <Project imgUrl='src/assets/t-lighting.png'
+                    <Project imgUrl='/portfolio/images/t-lighting.png'
                         title='T-Lighting'
                         target='Lập trình mạch điều khiển đèn led và tạo ứng dụng mobile kết nối qua bluetooth'
                         feature={[
@@ -172,7 +172,7 @@ function Home() {
                             'Google Play': 'https://play.google.com/store/apps/details?id=com.ngocthai.tlighting&hl=vi',
                             'Appstore': 'https://apps.apple.com/app/t-lighting/id6749724474'
                         }}
-                        images={Array.from({ length: 7 }, (_, i) => `src/assets/tlighting/${i+1}.jpg`)}
+                        images={Array.from({ length: 7 }, (_, i) => `/portfolio/images/tlighting/${i+1}.jpg`)}
                     />
                 </section>
                 {currentShowDetail && (
