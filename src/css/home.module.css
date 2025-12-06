@@ -17,12 +17,6 @@
   aspect-ratio: 16/8;
 }
 
-@media (max-width: 520px) {
-  .home {
-    aspect-ratio: 9/11;
-  }
-}
-
 .mainInformation {
   width: 90%;
   padding: clamp(16px, 4vw, 48px) clamp(16px, 5vw, 64px);
@@ -43,6 +37,15 @@
   100% {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+@media (max-width: 520px) {
+  .home {
+    aspect-ratio: 9/11;
+  }
+  .mainInformation {
+    flex-direction: column;
   }
 }
 
