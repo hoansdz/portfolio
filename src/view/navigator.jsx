@@ -1,40 +1,59 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from '../css/navigator.module.css'
-import { Routes, Route, NavLink } from "react-router-dom"
+import { LangContext } from '../App'
 
-function PageButton({ title, route, activeId}) {
+function PageButton({ title, route, activeId }) {
     const id = route.replace('#', '')
     return (
-        // <NavLink to={route} className={({ isActive }) => 
-        //     `${styles.pageLink} ${isActive ? styles.active : ''}`}>
-        //     {title}
-        // </NavLink>
-        <a className={`${id === activeId ? styles.active : ''} ${styles.pageLink}`} href={route}>{title}</a>
+        <a className={`${id === activeId ? styles.active : ''} ${styles.pageLink}`} href={route}>
+            {title}
+        </a>
     )
 }
 
 function Navigator() {
+    const { lang } = useContext(LangContext)
     const [activeId, setActiveId] = useState('home')
+
     useEffect(() => {
-        const sections = document.querySelectorAll('section')
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setActiveId(entry.target.id)
+        const handleScroll = () => {
+            // 1. Quét DOM trực tiếp bên trong lúc cuộn. 
+            // Dù Home có render chậm cỡ nào thì cuộn chuột là nó sẽ quét lại và tìm thấy!
+            const sections = document.querySelectorAll('section[id]');
+            if (sections.length === 0) return;
+
+            let current = 'home';
+            // 2. Điểm tia laser: Lấy tọa độ 1/3 màn hình tính từ trên xuống làm mốc kích hoạt
+            const triggerPoint = window.innerHeight / 4;
+
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                // 3. Nếu Đỉnh của section đã vượt qua tia laser VÀ Đáy của nó chưa qua khỏi tia laser
+                if (rect.top <= triggerPoint && rect.bottom >= triggerPoint) {
+                    current = section.id;
                 }
-            })
-        }, {
-            threshold: 0.6
-        })
-        sections.forEach(section => observer.observe(section))
-        return () => observer.disconnect()
-    })
+            });
+
+            // Chỉ update state nếu có sự thay đổi để tránh re-render thừa
+            setActiveId((prevId) => prevId !== current ? current : prevId);
+        };
+
+        // CHÌA KHÓA VÀNG: Tham số 'true' (useCapture).
+        // Nó ép trình duyệt phải bắt sự kiện scroll xuyên qua mọi component, 
+        // bất chấp thanh cuộn đang nằm ở window hay thẻ div nào!
+        window.addEventListener('scroll', handleScroll, true);
+        
+        // Chạy mồi 1 lần sau khi load nửa giây để bắt DOM nếu người dùng đang ở giữa trang
+        setTimeout(handleScroll, 500);
+
+        return () => window.removeEventListener('scroll', handleScroll, true);
+    }, [])
+
     return (
-        <nav className={`${activeId !== 'home' ? styles.contentHighlight : ''} ${styles.content}`}>
-            <PageButton title='Trang chủ' route='#home' activeId={activeId} />
-            <PageButton title='Về tôi' route='#about' activeId={activeId} />
-            <PageButton title='Dự án' route='#projects' activeId={activeId} />
-            <PageButton title='Liên lạc' route='#contact' activeId={activeId} />
+        <nav className={`${activeId !== 'home' ? styles.contentHighlight : ''} ${activeId === 'projects' ? styles.projectsHighlight : ''} ${styles.content}`}>
+            <PageButton title={`${lang === 'vi' ? "Trang chủ" : "Home"}`} route='#home' activeId={activeId} />
+            <PageButton title={`${lang === 'vi' ? "Về tôi" : "About"}`} route='#about' activeId={activeId} />
+            <PageButton title={`${lang === 'vi' ? "Dự án" : "Projects"}`} route='#projects' activeId={activeId} />
         </nav>
     )
 }

@@ -1,6 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 @import 'tailwindcss';
 
+@font-face {
+  font-family: 'MyFont';
+  src: url('./assets/fonts/MyFont-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html {
   width: 100dvw;
   scroll-behavior: smooth;
@@ -12,9 +19,11 @@ body {
   width: 100dvw;
   display: flex;
   justify-content: center;
-  background-color: rgb(227, 242, 255);
+  background: linear-gradient(135deg, rgb(227, 242, 255) 0%, rgb(215, 240, 255) 100%);
   box-sizing: border-box;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
@@ -30,18 +39,22 @@ body {
 
 .smallT {
   font-size: clamp(0.5rem, 0.8vw, 0.9rem);
+  line-height: 1.4;
 }
 
 .normalT {
   font-size: clamp(0.8rem, 1.3vw, 1.3rem);
+  line-height: 1.6;
 }
 
 .largeT {
   font-size: clamp(1rem, 1.6vw, 1.8rem);
+  line-height: 1.5;
 }
 
 .largestT {
   font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+  line-height: 1.3;
 }
 
 .centerT {

@@ -4,33 +4,54 @@
     align-items: center;
     justify-content: center;
     position: fixed;
-    padding: clamp(32px, 8vw, 64px) 0;
-    gap: clamp(12px, 2vw, 32px);
+    padding: clamp(28px, 6vw, 56px) 0;
+    gap: clamp(16px, 2.5vw, 48px);
     box-sizing: border-box;
     left: 0;
-    z-index: 1;
+    z-index: 999;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .contentHighlight {
-    padding: clamp(16px, 4vw, 32px) 0;
+    padding: clamp(16px, 3vw, 28px) 0;
     background-color: white;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid rgba(74, 176, 155, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-.pageLink { 
+.projectsHighlight {
+    background: linear-gradient(135deg, rgba(240, 252, 255, 0.95) 0%, rgba(230, 247, 255, 0.95) 100%) !important;
+    border-bottom: 2px solid rgba(74, 176, 155, 0.3) !important;
+}
+
+.projectsHighlight .pageLink {
+    color: rgba(78, 176, 155, 0.7);
+}
+
+.projectsHighlight .active {
+    color: rgb(78, 176, 155);
+    background-color: rgba(78, 176, 155, 0.15);
+}
+
+.pageLink {
     cursor: pointer;
-    padding: 0;
-    color: rgb(213, 213, 213);
-    font-weight: 700;
-    font-size: clamp(1rem, 1.4vw, 1.6rem);
+    padding: 8px 16px;
+    color: rgba(213, 213, 213, 0.9);
+    font-weight: 600;
+    font-size: clamp(0.95rem, 1.2vw, 1.4rem);
     text-decoration: none;
-    transition: color 0.25s ease;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-radius: 8px;
+    position: relative;
 }
 
 .pageLink:hover {
-    color: rgb(13, 186, 255);
+    color: rgb(42, 216, 210);
+    background-color: rgba(42, 216, 210, 0.05);
 }
 
 .active {
-    color: rgb(29, 191, 255);
+    color: rgb(42, 216, 210);
+    background-color: rgba(42, 216, 210, 0.1);
+    font-weight: 700;
 }
