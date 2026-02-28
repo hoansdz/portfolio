@@ -167,9 +167,9 @@ function Project(params) {
     )
 }
 
-// ==============================
-// GIAO DIỆN TIẾNG VIỆT
-// ==============================
+
+
+
 function HomeVI() {
     return (
         <>
@@ -180,18 +180,18 @@ function HomeVI() {
                     <p className='normalT' style={{ color: 'rgba(255, 255, 255, 0.85)', fontSize: 'clamp(1rem, 1.5vw, 1.3rem)' }}>Systems • Fullstack • Mobile Engineer</p>
                 </div>
             </section>
-            
+
             <section id='about' className={styles.mainInformation}>
                 <img src='/portfolio/images/my_face.jpg' alt='my avatar' className={'rounded-full w-24 h-24 lg:w-32 lg:h-32 self-center'} />
                 <div>
                     <p className="normalT">
                         Xin chào! Tôi là một lập trình viên trẻ đam mê công nghệ, có khả năng xây dựng các hệ thống từ cấp độ lõi (C++, Compiler, Vi điều khiển) cho đến các ứng dụng đầu cuối (Web/Mobile App thực tế).<br /><br />
-                        
+
                         <b>Kinh nghiệm & Kỹ năng cốt lõi:</b><br />
                         - <b>Systems / Embedded:</b> C++, Compiler Design, Virtual Machines, lập trình vi điều khiển mạch Bluetooth (BLE).<br />
                         - <b>Mobile App:</b> Native Android (Java, XML, ViewBinding), Flutter (Dart).<br />
                         - <b>Web & Backend:</b> React, Next.js, HTML/CSS/JS, Tailwind, Firebase, Supabase.<br /><br />
-                        
+
                         <b>Định hướng công việc:</b><br />
                         1. <b>Tìm kiếm cơ hội thực tập/làm việc:</b> Ở vị trí Fresher/Junior trong các mảng <b>C++, Embedded Systems, Backend hoặc Mobile App</b> tại các môi trường chuyên nghiệp.<br />
                         2. <b>Nhận dự án Freelance:</b> Xây dựng Website giới thiệu, Landing page, Ứng dụng Web/Mobile Fullstack, lập trình IoT/mạch điều khiển và fix bug tối ưu hiệu suất với tiêu chí: Nhẹ, Mượt, Dễ mở rộng và Hỗ trợ tận tâm.<br />
@@ -283,9 +283,9 @@ function HomeVI() {
     )
 }
 
-// ==============================
-// GIAO DIỆN TIẾNG ANH
-// ==============================
+
+
+
 function HomeEN() {
     return (
         <>
@@ -296,18 +296,18 @@ function HomeEN() {
                     <p className='normalT' style={{ color: 'rgba(255, 255, 255, 0.85)', fontSize: 'clamp(1rem, 1.5vw, 1.3rem)' }}>Systems • Fullstack • Mobile Engineer</p>
                 </div>
             </section>
-            
+
             <section id='about' className={styles.mainInformation}>
                 <img src='/portfolio/images/my_face.jpg' alt='my avatar' className={'rounded-full w-24 h-24 lg:w-32 lg:h-32 self-center'} />
                 <div>
                     <p className="normalT">
                         Hello! I am a passionate software engineer capable of building systems from the core level (C++, Compilers, Microcontrollers) to end-user applications (Web/Mobile Apps).<br /><br />
-                        
+
                         <b>Core Skills & Experience:</b><br />
                         - <b>Systems / Embedded:</b> C++, Compiler Design, Virtual Machines, Bluetooth Low Energy (BLE) microcontrollers.<br />
                         - <b>Mobile App:</b> Native Android (Java, XML, ViewBinding), Flutter (Dart).<br />
                         - <b>Web & Backend:</b> React, Next.js, HTML/CSS/JS, Tailwind, Firebase, Supabase.<br /><br />
-                        
+
                         <b>Career Objectives:</b><br />
                         1. <b>Seeking Internship/Full-time Opportunities:</b> Actively looking for Fresher/Junior roles in <b>C++, Embedded Systems, Backend, or Mobile App development</b> within professional environments.<br />
                         2. <b>Available for Freelance Projects:</b> Building landing pages, Fullstack Web/Mobile applications, IoT/Hardware programming, and performance optimization. My focus: Lightweight, Smooth, Scalable, and Dedicated Support.<br />
@@ -399,9 +399,9 @@ function HomeEN() {
     )
 }
 
-// ==============================
-// XỬ LÝ LOGIC ĐỔI NGÔN NGỮ
-// ==============================
+
+
+
 export default function Home() {
     const { lang, setLang } = useContext(LangContext);
     const [currentShowDetail, setCurrentShowDetail] = useState(null);
@@ -413,7 +413,7 @@ export default function Home() {
                 <button
                     onClick={() => {
                         setLang(lang === 'vi' ? 'en' : 'vi');
-                        setCurrentShowDetail(null); // Đóng Dialog nếu đang mở
+                        setCurrentShowDetail(null);
                     }}
                     style={{
                         padding: '10px 18px',
@@ -437,7 +437,7 @@ export default function Home() {
             </div>
 
             <DialogContext.Provider value={{ setCurrentShowDetail }}>
-                
+
                 {/* Render nội dung tùy theo state lang */}
                 {lang === 'vi' ? <HomeVI /> : <HomeEN />}
 

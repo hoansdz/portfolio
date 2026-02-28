@@ -17,33 +17,26 @@ function Navigator() {
 
     useEffect(() => {
         const handleScroll = () => {
-            // 1. Quét DOM trực tiếp bên trong lúc cuộn. 
-            // Dù Home có render chậm cỡ nào thì cuộn chuột là nó sẽ quét lại và tìm thấy!
+
+
             const sections = document.querySelectorAll('section[id]');
             if (sections.length === 0) return;
 
             let current = 'home';
-            // 2. Điểm tia laser: Lấy tọa độ 1/3 màn hình tính từ trên xuống làm mốc kích hoạt
+
             const triggerPoint = window.innerHeight / 4;
 
             sections.forEach(section => {
                 const rect = section.getBoundingClientRect();
-                // 3. Nếu Đỉnh của section đã vượt qua tia laser VÀ Đáy của nó chưa qua khỏi tia laser
+
                 if (rect.top <= triggerPoint && rect.bottom >= triggerPoint) {
                     current = section.id;
                 }
             });
-
-            // Chỉ update state nếu có sự thay đổi để tránh re-render thừa
             setActiveId((prevId) => prevId !== current ? current : prevId);
         };
-
-        // CHÌA KHÓA VÀNG: Tham số 'true' (useCapture).
-        // Nó ép trình duyệt phải bắt sự kiện scroll xuyên qua mọi component, 
-        // bất chấp thanh cuộn đang nằm ở window hay thẻ div nào!
         window.addEventListener('scroll', handleScroll, true);
-        
-        // Chạy mồi 1 lần sau khi load nửa giây để bắt DOM nếu người dùng đang ở giữa trang
+
         setTimeout(handleScroll, 500);
 
         return () => window.removeEventListener('scroll', handleScroll, true);

@@ -17,7 +17,7 @@ function App() {
   })
 
   return (
-    // <BrowserRouter>
+
     <div className='main-body'>
       <LangContext.Provider value={{ lang, setLang }}>
         <Navigator />
@@ -33,7 +33,6 @@ function App() {
         <BottomNavigator />
       </LangContext.Provider>
     </div>
-    // {/* </BrowserRouter> */}
   );
 }
 

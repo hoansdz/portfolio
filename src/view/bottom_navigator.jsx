@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import styles from '../css/bottom_navigator.module.css'
-// Nhớ import LangContext từ đúng đường dẫn file gốc của bạn (ví dụ App.jsx)
-import { LangContext } from '../App.jsx' 
+
+import { LangContext } from '../App.jsx'
 
 function BottomNavigator() {
-    // Lấy biến lang từ Context
+
     const { lang } = useContext(LangContext);
     const isEn = lang === 'en';
 
@@ -14,7 +14,7 @@ function BottomNavigator() {
                 <p className='normalT' style={{ color: 'white', fontWeight: '600', marginBottom: '16px' }}>
                     {isEn ? 'Have a question? Contact me via:' : 'Bạn có câu hỏi? Liên hệ với tôi qua:'}
                 </p>
-                
+
                 <div className={styles.contactArea}>
                     <a href='https://www.facebook.com/ngoc.hoan.290402' rel='noopener noreferrer' target='_blank'>
                         <img className={styles.contactIcon} alt='Facebook' src='https://upload.wikimedia.org/wikipedia/commons/b/b9/2023_Facebook_icon.svg' />
